@@ -1,0 +1,495 @@
+    /*  
+ * Grid 
+ */
+    
+    $maxWidthContainer: 1092;
+    $maxWidthColumn: 80;
+    $maxWidthMargin: 12;
+    @function widthCol($numberСolumns) {
+        @if ($numberСolumns > 1) {
+            @return percentage($maxWidthColumn * $numberСolumns / $maxWidthContainer + ($numberСolumns - 1) * $maxWidthMargin / $maxWidthContainer);
+        }
+        @else {
+            @return percentage($maxWidthColumn * $numberСolumns / $maxWidthContainer);
+        }
+    }
+    
+    @function offsetCol($numberСolumns) {
+        @return percentage($maxWidthColumn * $numberСolumns / $maxWidthContainer + $numberСolumns * $maxWidthMargin / $maxWidthContainer);
+    }
+    
+    @function widthText($numberСolumns, $colBlock) {
+        @return percentage($maxWidthColumn * $numberСolumns * $colBlock / $maxWidthContainer + $numberСolumns * $colBlock * $maxWidthMargin / $maxWidthContainer + ( $colBlock * 2) * $maxWidthMargin / $maxWidthContainer);
+    }
+    
+    @mixin clearfix {
+        &::after {
+            display: table;
+            clear: both;
+            content: ' ';
+        }
+    }
+    
+    @mixin PTSansBold {
+        font-family: 'PT Sans', sans-serif;
+        font-weight: bold;
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html {
+        box-sizing: border-box;
+    }
+    
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+    
+    .container {
+        width: 90%;
+        min-width: 819px;
+        max-width: 1092px;
+        margin: 0 auto;
+    }
+    
+    [class*="col"] {
+        //width: calc((100% - 12px ) / 3);
+        //margin-right: .75rem;
+        margin-right: percentage(12 / 1092);
+        float: left;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    
+    .row {
+        @include clearfix;
+        width: 100%;
+    }
+    
+    @for $i from 1 through 12 {
+        .col-#{$i} {
+            width: widthCol($i);
+        }
+        .offset-#{$i} {
+            margin-left: offsetCol($i);
+        }
+    }
+    /*
+* Header
+*/
+    
+    header {
+        background: url('../img/background1@05x.jpg');
+        background-size: cover;
+        min-width: 52.5rem;
+        height: 52.6875rem;
+    }
+    
+    .header-top-line {
+        padding-top: 1.55rem;
+    }
+    
+    .jino {
+        line-height: 15px;
+        display: inline;
+        vertical-align: middle;
+    }
+    
+    .jino-white {
+        path {
+            fill: white;
+        }
+    }
+    
+    .jino-red {
+        path {
+            fill: #b22725;
+        }
+    }
+    
+    .domain {
+        @include PTSansBold;
+        font-size: 1rem;
+        color: white;
+        margin-left: .625rem;
+        line-height: 15px;
+        display: inline;
+        vertical-align: middle;
+    }
+    
+    .domain-black {
+        @include PTSansBold;
+        font-size: 1rem;
+        color: black;
+    }
+    
+    .stock {
+        margin-top: .5rem;
+        @include PTSansBold;
+        font-size: 1.025rem;
+        line-height: 18px;
+        letter-spacing: 0.08rem;
+        color: white;
+        text-align: center;
+    }
+    
+    .h1 {
+        margin-top: 3.125rem;
+        text-align: center;
+        font-size: 2.45em;
+        line-height: 2.1em;
+        font-family: 'PT Sans Caption', sans-serif;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .form-check-domain {
+        form {
+            width: 100%;
+            height: 2.9rem;
+            padding: 2.5rem 2rem;
+            margin-top: 0.5625rem;
+            border-radius: .5rem;
+            background-color: #fff;
+            z-index: 10;
+            position: relative;
+            input {
+                @include PTSansBold;
+                width: 70%;
+                border: none;
+                color: #333;
+                font-size: 1.5rem;
+                top: 50%;
+                transform: translate(0, -50%);
+                &:active,
+                &:hover,
+                &:focus {
+                    outline: 0;
+                    outline-offset: 0;
+                }
+            }
+            button {
+                float: right;
+                font-size: 1.35rem;
+                width: 23.9%;
+                font-family: 'PT Sans', sans-serif;
+                border: none;
+                position: relative;
+                background-color: #5f6062;
+                border-radius: .5rem;
+                color: #fff;
+                text-align: center;
+                padding-top: .8rem;
+                padding-bottom: .8rem;
+                left: 1rem;
+                top: 50%;
+                transform: translate(0, -50%)
+            }
+        }
+    }
+    
+    .domain-free {
+        background: #333;
+        opacity: .9;
+        width: 100%;
+        text-align: center;
+        border-radius: 8px;
+        padding: 1.3rem 0 1rem 0;
+        position: relative;
+        top: -10px;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 1rem;
+        opacity: 0;
+        p {
+            margin: 0;
+            margin-left: -1rem;
+            color: #fff;
+        }
+        a {
+            color: #77b53c;
+        }
+    }
+    
+    .сreate-account {
+        text-align: center;
+    }
+    
+    .сreate-account a {
+        @include PTSansBold;
+        display: inline-block;
+        color: #fff;
+        font-size: 1.6rem;
+        border-radius: 5px;
+        text-decoration: none;
+        background: #77b53c;
+        line-height: 3.5rem;
+        padding: 0 2.5rem;
+        outline: none;
+        margin-top: 4rem;
+        margin-bottom: 5rem;
+    }
+    
+    .сreate-account.first a {
+        @include PTSansBold;
+        display: inline-block;
+        color: #fff;
+        font-size: 1.6rem;
+        border-radius: 5px;
+        text-decoration: none;
+        background: #77b53c;
+        line-height: 3.5rem;
+        padding: 0 2.5rem;
+        outline: none;
+        margin-top: 1.4rem;
+        margin-bottom: 5rem;
+    }
+    
+    .down {
+        display: block;
+        margin: 3.625rem auto 0 auto;
+        width: 27px;
+        height: 50px;
+        background: url('../img/down.png');
+    }
+    
+    section {
+        margin-top: 1.5rem;
+    }
+    
+    .section-heading {
+        margin-top: 0.7rem;
+    }
+    
+    h2 {
+        @include PTSansBold;
+        text-align: center;
+        font-size: 2.2rem;
+        color: #333333;
+        padding: 2.5rem 0 4.8rem 0;
+        margin: 0;
+    }
+    
+    .features {
+        position: relative;
+    }
+    
+    .features-card {
+        position: relative;
+        text-align: center;
+        h3 {
+            font-family: 'PT Sans', sans-serif;
+            color: #333333;
+            font-size: 1.25rem;
+            margin: 0.8rem 0 0 0;
+            height: 3.25rem;
+        }
+    }
+    
+    .features-text {
+        width: widthText(12, 4);
+        background-color: #f7f7f7;
+        border: 1px solid rgba(95, 96, 98, .5);
+        border-radius: .5rem;
+        padding: 0.25rem 2.6rem 0.35rem 2.6rem;
+        margin: 1.6rem 0 0 0;
+        min-height: ‭100px;
+        display: none;
+        &::before {
+            width: 18px;
+            height: 18px;
+            border: 1px solid #ccc;
+            border-width: 1px 0 0 1px;
+            transform: rotate(45deg) translate(-9px, -9px);
+            transform-origin: 0 0;
+            box-sizing: border-box;
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 9.95rem;
+            z-index: 15;
+            background: #f7f7f7;
+        }
+        p {
+            font-family: 'PT Sans', sans-serif;
+            color: #333333;
+            font-size: 1rem;
+        }
+    }
+    
+    .features-row-second {
+        margin-top: 2.1rem;
+    }
+    
+    .сreate-account.second a {
+        margin-top: 2.4rem;
+        margin-bottom: 5.2rem;
+    }
+    
+    footer {
+        background: url('../img/background2@05x.jpg');
+        background-size: cover;
+        min-width: 52.5rem;
+        padding-top: 1.4rem;
+        h2 {
+            padding: 3rem 0 2.1rem 0;
+            color: #ffffff;
+        }
+    }
+    
+    .footer-heading {
+        margin-top: .5rem;
+    }
+    
+    .footer-text-big {
+        text-align: center;
+        font-family: 'PT Sans Caption', sans-serif;
+        font-weight: bold;
+        font-size: 3.125rem;
+        line-height: 3.75rem;
+        color: #ffffff;
+        p {
+            margin: 3rem 0 0 0;
+            padding: 0;
+        }
+    }
+    
+    .сreate-account.third a {
+        margin-top: 2.7rem;
+        margin-bottom: 3.3rem;
+    }
+    
+    .banner {
+        background-color: #df4a5e;
+        border-radius: 5px;
+        padding: 0 38px;
+        margin-bottom: 2rem;
+    }
+    
+    .banner-text {
+        font-size: 1.375rem;
+        font-family: 'PT Sans', sans-serif;
+        color: #fff;
+        width: 75%;
+        float: left;
+        p {
+            margin: 28px 0;
+            padding: 0;
+        }
+        a {
+            color: #fff;
+        }
+    }
+
+    .thousend-plus {
+        width: 25%;
+        float: left;
+    }
+    
+    span.thousend {
+        font-family: 'PT Sans Caption', sans-serif;
+        font-weight: bold;
+        font-size: 3.125rem;
+        color: #fff;
+        float: right;
+        padding: 20px 0;
+        svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            fill: #fff;
+        }
+    }
+    
+    .thousend:before {
+        content: '';
+        vertical-align: middle;
+        border: 1px solid rgba(255, 255, 255, .2);
+        margin-right: 33px;
+    }
+    
+    .watermark {
+        font-family: 'PT Sans', sans-serif;
+        font-size: 0.875rem;
+        color: #fff;
+        margin-bottom: 2.25rem;
+        a {
+            color: #fff;
+        }
+    }
+
+
+
+    @media screen and (max-width: 1024px ) {
+        html {
+            font-size: 12px;
+        }
+        .banner-text {
+            width: 100%;
+        }
+        .thousend-plus {
+            display: none;
+        }
+        .features-text::before {
+            top: 11.45rem;
+        }
+    }
+
+    @media screen and (max-width: 834px ) {
+        .container {
+            width: 80%;
+            min-width: auto;
+        }
+        @for $i from 1 through 12 {
+            .col-#{$i} {
+                width: 100%; //widthCol($i);
+            }
+            .offset-#{$i} {
+                margin-left: 0; //offsetCol($i);
+            }
+        }
+        .h1 {
+            margin-top: 0
+        } 
+        .сreate-account.first a {
+            margin-bottom: 0;
+        }
+        footer,
+        header {
+            min-width: 340px;
+        }
+        .features-text {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 576px ) {
+        .h1 {
+            margin-top: 1rem;
+            font-size: 2rem;
+        }
+        html {
+            font-size: 10px;
+        }
+        .down {
+            margin: 3rem auto 0 auto;
+        }
+        .form-check-domain form input {
+            width: 65%;
+        }
+        .form-check-domain form button {
+            width: 35%;
+        }
+        .footer-text-big p {
+            font-size: 2.5rem;
+        }
+        
+        .features-text::before {
+            top: 12.35rem;
+        }
+    }
